@@ -53,7 +53,7 @@ p {
     animation: fadeInDown 2s;
 }
 
-.hero p {
+.hero h5 {
     font-family: 'Playfair Display', serif;
     font-size: 1.8em;
     margin-top: 20px;
@@ -105,7 +105,7 @@ h2 {
     font-family: 'Open Sans', sans-serif;
 }
 
-.ucapan {
+#ucapan {
     background: linear-gradient(145deg, #fff1e6, #ffe6cc);
     border-radius: 24px;
     max-width: 600px;
@@ -114,8 +114,8 @@ h2 {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.ucapan input,
-.ucapan textarea {
+#ucapan input,
+#ucapan textarea {
     width: 100%;
     padding: 16px;
     margin: 10px 0;
@@ -123,6 +123,49 @@ h2 {
     border: 1px solid #ccc;
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
+}
+
+#daftarUcapan li {
+    position: relative;
+    background-color: #fffdf8;
+    border-left: 6px solid #f39c12;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    font-size: 1.1em;
+    color: #4d4d4d;
+    transition: transform 0.2s, background-color 0.3s;
+    animation: fadeInWish 0.6s ease-in-out;
+}
+
+#daftarUcapan li:hover {
+    background-color: #fff7eb;
+    transform: translateY(-3px);
+}
+
+#daftarUcapan li::before {
+    content: "💌";
+    position: absolute;
+    top: 15px;
+    left: -35px;
+    font-size: 1.5em;
+}
+
+@keyframes fadeInWish {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+#daftarUcapan li:hover {
+    background-color: #f0f9f0;
 }
 
 .gallery {
@@ -156,7 +199,7 @@ h2 {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.person p {
+.person h5 {
     font-family: 'Great Vibes', cursive;
     font-size: 1.5em;
     color: #e67e22;

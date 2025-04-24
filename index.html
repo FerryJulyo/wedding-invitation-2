@@ -65,12 +65,13 @@
         </form>
     </section><br><br>
 
-    <section id="ucapan" class="ucapan" data-aos="fade-up">
+    <section id="ucapan" data-aos="fade-up">
         <h2>Ucapan</h2>
-        <ul id="daftarUcapan"></ul>
-        <form onsubmit="tambahUcapan(event)">
-            <input type="text" id="userNama" value="" hidden>
-            <textarea id="userUcapan" placeholder="Tulis ucapanmu..." required></textarea>
+        <div id="daftarUcapan">
+            <!-- Ucapan akan ditampilkan di sini -->
+        </div><br>
+        <form onsubmit="return sendWish()">
+            <textarea id="userUcapan" rows="4" placeholder="Tulis ucapan Anda di sini" required></textarea>
             <button type="submit" class="button">Kirim Ucapan</button>
         </form>
     </section>
@@ -97,14 +98,36 @@
         }
 
         // Ucapan
-        function tambahUcapan(e) {
-            e.preventDefault();
-            const nama = getParameterByName('nama') || 'Tamu';
-            const ucapan = document.getElementById('userUcapan').value;
-            const li = document.createElement('li');
-            li.innerText = `${nama}: ${ucapan}`;
-            document.getElementById('daftarUcapan').appendChild(li);
-            document.getElementById('userUcapan').value = '';
+        function saveWish(name, message) {
+            const wishes = JSON.parse(localStorage.getItem('daftarUcapan')) || [];
+            wishes.push({ name, message });
+            localStorage.setItem('daftarUcapan', JSON.stringify(wishes));
+            return wishes;
+        }
+
+        // Menampilkan ucapan
+        function displayWishes() {
+            const wishes = JSON.parse(localStorage.getItem('daftarUcapan')) || [];
+            const wishList = document.getElementById('daftarUcapan'); // Tambahkan ini
+            wishList.innerHTML = '';
+            wishes.forEach(wish => {
+                const wishElement = document.createElement('div');
+                wishElement.classList.add('wish-item');
+                wishElement.innerHTML = `<strong>${wish.name}:</strong><br>${wish.message}`;
+                wishList.appendChild(wishElement);
+            });
+        }
+
+
+        // Kirim ucapan
+        function sendWish() {
+            const wishMessage = document.getElementById('userUcapan').value;
+            if (wishMessage) {
+                const wishes = saveWish(name, wishMessage);
+                displayWishes();
+                document.getElementById('userUcapan').value = ''; // Reset input
+            }
+            return false; // Prevent form submission
         }
 
         // Ambil nama dari URL
@@ -112,6 +135,7 @@
             const url = new URL(window.location.href);
             return url.searchParams.get(name);
         }
+        displayWishes();
     </script>
 </body>
 

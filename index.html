@@ -49,6 +49,15 @@
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
         }
 
+        h1, p {
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+
+
         .hero h1 {
             font-family: 'Great Vibes', cursive;
             font-size: 5em;
@@ -225,7 +234,7 @@
 <body>
     <header class="hero">
         <h1 data-aos="zoom-in">Wedding Party</h1>
-        <p data-aos="fade-up">Kami mengundang Anda untuk merayakan hari istimewa kami</p>
+        <p data-aos="fade-up">Kami mengundang Saudara/Saudari <b id="userName"></b> untuk merayakan hari istimewa kami</p>
         <button class="button" onclick="document.getElementById('rsvp').scrollIntoView({behavior: 'smooth'})"
             data-aos="fade-up">Buka Undangan</button>
     </header>
@@ -293,6 +302,9 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000 });
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name') || 'Tamu';
+        document.getElementById('userName').textContent = name;
 
         function sendWA(event) {
             event.preventDefault();
